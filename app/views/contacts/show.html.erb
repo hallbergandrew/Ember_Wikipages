@@ -6,9 +6,10 @@
 <p>Email: <%= @contact.email %></p>
 
 
-<p><a href="/contacts/<%= @contact.id %>/edit">Edit</a></p>
+<p><a href="/contacts/<%= @contact.id %>/edit" class="btn btn-default">Edit</a></p>
 <p><a href="/contacts/<%= @contact.id %>"
       data-confirm="You sure?"
       data-method="delete"
-      rel="nofollow">Delete</a></p>
+      rel="nofollow"
+      class="btn btn-danger">Delete</a></p>
 <p><a href="/contacts">Return to contact listing</a></p>
