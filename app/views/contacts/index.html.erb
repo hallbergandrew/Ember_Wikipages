@@ -4,8 +4,8 @@
 
 <ul>
   <% @contacts.each do |contact| %>
-    <li><a href="/contacts/<%= contact.id %>"><%= contact.name %></a></li>
+    <li><%= link_to contact.name, contact_path(contact) %></li>
   <% end %>
 </ul>
 
-<a href="/contacts/new" class="btn btn-default">New contact</a>
+<%= link_to "New contact", new_contact_path, :class => "btn btn-default" %>

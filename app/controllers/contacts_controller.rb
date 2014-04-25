@@ -1,41 +1,37 @@
 class ContactsController < ApplicationController
   def index
     @contacts = Contact.all
-    render('contacts/index.html.erb')
   end
 
   def new
     @contact = Contact.new
-    render('contacts/new.html.erb')
   end
 
   def create
     @contact = Contact.new(params[:contact])
     if @contact.save
       flash[:notice] = "Contact created."
-      redirect_to('/contacts')
+      redirect_to contacts_path
     else
-      render('contacts/new.html.erb')
+      render 'new'
     end
   end
 
   def show
     @contact = Contact.find(params[:id])
-    render('contacts/show.html.erb')
   end
 
   def edit
     @contact = Contact.find(params[:id])
-    render('contacts/edit.html.erb')
   end
 
   def update
     @contact = Contact.find(params[:id])
     if @contact.update(params[:contact])
       flash[:notice] = "Contact updated."
-      redirect_to("/contacts/#{@contact.id}")
+      redirect_to contact_path(@contact)
     else
-      render('contacts/edit.html.erb')
+      render 'edit'
     end
   end
 
@@ -43,6 +39,6 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
     @contact.destroy
     flash[:notice] = "Contact deleted."
-    redirect_to("/contacts")
+    redirect_to contacts_path
   end
 end
