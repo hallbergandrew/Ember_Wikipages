@@ -1,44 +1,42 @@
 class ContactsController < ApplicationController
   def index
     @contacts = Contact.all
-  end
-
-  def new
-    @contact = Contact.new
+    render :json => @contacts
   end
 
   def create
-    @contact = Contact.new(params[:contact])
+    @contact = Contact.new(contact_params)
     if @contact.save
-      flash[:notice] = "Contact created."
-      redirect_to contacts_path
+      render :json => @contact, :status => 201
     else
-      render 'new'
+      render :json => @contact.errors, :status => 422
     end
   end
 
   def show
     @contact = Contact.find(params[:id])
-  end
-
-  def edit
-    @contact = Contact.find(params[:id])
+    render :json => @contact
   end
 
   def update
     @contact = Contact.find(params[:id])
-    if @contact.update(params[:contact])
-      flash[:notice] = "Contact updated."
-      redirect_to contact_path(@contact)
+    if @contact.update(contact_params)
+      head :no_content
     else
-      render 'edit'
+      render :json => @contact.errors, :status => 422
     end
   end
 
   def destroy
     @contact = Contact.find(params[:id])
     @contact.destroy
-    flash[:notice] = "Contact deleted."
-    redirect_to contacts_path
+    head :no_content
+  end
+
+private
+  def contact_params
+    params.fetch(:contact).permit(:name, :email, :phone)
   end
 end
+
+

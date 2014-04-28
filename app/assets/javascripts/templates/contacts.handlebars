@@ -1,0 +1,7 @@
+<h1>Wikipages</h1>
+
+<ul>
+{{#each contact in controller}}
+<li>{{#link-to 'contact' contact}}{{contact.name}}{{/link-to}}</li>
+{{/each}}
+</ul>
