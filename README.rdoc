@@ -1,3 +1,3 @@
-# Rails app with Ember front end.
+=Rails app with Ember front end.
 
-## Learning how to implement a front end framework with a Rails foundation.
+==Learning how to implement a front end framework with a Rails foundation.
